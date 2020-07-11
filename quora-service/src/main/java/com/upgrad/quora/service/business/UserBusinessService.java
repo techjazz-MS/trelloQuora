@@ -21,6 +21,38 @@ public class UserBusinessService {
     @Autowired
     private PasswordCryptographyProvider passwordCryptographyProvider;
 
+    /* Check if the accessToken is present in DB or not. */
+    public UserAuthEntity getUserbyToken(final String accessToken) throws AuthorizationFailedException {
+        UserAuthEntity userAuthToken = userDao.getUserAuthByToken(accessToken);
+
+        if(userAuthToken == null){
+            throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
+        }
+
+        if(userAuthToken.getLogoutAt() != null){
+            throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to get user details");
+        }
+
+        return userAuthToken;
+    }
+
+    /* Check if the UserUUID is present in DB or not. */
+    public UserEntity getUserById(final String userUuid) throws UserNotFoundException {
+        UserEntity userId = userDao.getUserById(userUuid);
+
+        if(userId == null){
+            throw new UserNotFoundException("USR-001", "User with entered uuid does not exist");
+        }
+
+        return userId;
+    }
+
+    /* Get the userProfile */
+    public UserEntity getUserProfile(final String userUuid, final String accessToken) throws AuthorizationFailedException, UserNotFoundException {
+        getUserbyToken(accessToken);
+        UserEntity userById = getUserById(userUuid);
+        return userById;
+    }
 
     @Transactional(propagation = Propagation.REQUIRED)
     public UserEntity signup(UserEntity userEntity) throws SignUpRestrictedException  {

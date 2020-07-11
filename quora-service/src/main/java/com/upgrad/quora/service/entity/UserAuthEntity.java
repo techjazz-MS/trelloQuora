@@ -25,7 +25,7 @@ public class UserAuthEntity {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name = "UUID")
     @NotNull
@@ -52,7 +52,7 @@ public class UserAuthEntity {
     @Column(name = "LOGOUT_AT")
     private ZonedDateTime logoutAt;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
