@@ -6,7 +6,6 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="entityManagerFactory" />
           <factory-entry name="quora-api" />
         </datasource-mapping>
         <naming-strategy-map />
@@ -41,7 +40,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://D:/Softwares/PostgresSQL/PostgresSQLJDBC_Driver/postgresql-42.2.14.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../postgresql-42.2.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

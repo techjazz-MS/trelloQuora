@@ -48,7 +48,9 @@ public class JwtTokenProvider {
         return JWT.create().withIssuer(TOKEN_ISSUER) //
                 .withKeyId(UUID.randomUUID().toString())
                 .withAudience(userUuid) //
-                .withIssuedAt(issuedAt).withExpiresAt(expiresAt).sign(algorithm);
+                .withIssuedAt(issuedAt)
+                .withExpiresAt(expiresAt)
+                .sign(algorithm);
     }
 
 }
